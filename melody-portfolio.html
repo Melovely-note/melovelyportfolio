@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Melody Shewan — Social Media Marketer & Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #04080f;
+  --bg2:     #070d18;
+  --surface: #0c1524;
+  --border:  #111e30;
+  --border2: #1a2d45;
+  --text:    #dde6f5;
+  --muted:   #3a5470;
+  --soft:    #6b8aaa;
+  --accent:  #9b7fe8;
+  --accent2: #c4aaff;
+  --blue:    #3b6fd4;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Epilogue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Cursor */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .15s, height .15s;
+}
+.cursor-trail {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(155,127,232,0.4);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 1.6rem 5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(4,8,15,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--accent2); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 5rem 7rem;
+  position: relative; overflow: hidden;
+}
+.hero-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(110px); pointer-events: none;
+}
+.blob1 {
+  width: 600px; height: 600px;
+  background: #1a3a8f; opacity: 0.18;
+  top: -15%; right: -8%;
+  animation: drift 20s ease-in-out infinite;
+}
+.blob2 {
+  width: 400px; height: 400px;
+  background: #4b1fa8; opacity: 0.14;
+  bottom: 0; left: 5%;
+  animation: drift 26s 5s ease-in-out infinite reverse;
+}
+@keyframes drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%      { transform: translate(-20px,25px) scale(1.05); }
+  70%      { transform: translate(15px,-10px) scale(0.96); }
+}
+.hero-bg-letter {
+  position: absolute; bottom: -4rem; right: 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14rem, 26vw, 24rem); font-weight: 300; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(100,140,255,0.07);
+  user-select: none; pointer-events: none;
+}
+.hero-divider {
+  position: absolute; top: 0; left: 50%;
+  width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--border2) 25%, var(--border2) 75%, transparent);
+  opacity: 0.4; pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 860px; }
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2rem;
+}
+.eyebrow-line { width: 36px; height: 1px; background: var(--accent); opacity: 0.7; }
+.eyebrow-text {
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); opacity: 0.9;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 9.5vw, 9rem);
+  font-weight: 300; line-height: 0.9;
+  letter-spacing: -0.01em;
+}
+h1 em { font-style: italic; color: var(--accent2); }
+
+.hero-tagline {
+  margin-top: 2rem;
+  font-size: 1.05rem; font-weight: 300;
+  color: var(--soft); line-height: 1.75;
+  max-width: 50ch;
+}
+
+.hero-cta {
+  margin-top: 3rem;
+  display: flex; gap: 1.2rem; flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center;
+  padding: .9rem 2rem;
+  font-family: 'Epilogue', sans-serif;
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none; cursor: none;
+  transition: all .25s;
+}
+.btn-accent {
+  background: var(--accent); color: #fff;
+  border: 1px solid var(--accent);
+}
+.btn-accent:hover { background: var(--accent2); border-color: var(--accent2); color: var(--bg); }
+.btn-ghost {
+  background: transparent; color: var(--soft);
+  border: 1px solid var(--border2);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+
+.hero-scroll {
+  position: absolute; bottom: 3.5rem; right: 5rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+}
+.scroll-label {
+  font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--muted); writing-mode: vertical-rl;
+}
+.scroll-bar {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* SHARED */
+section { padding: 8rem 5rem; }
+
+.sec-label {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sec-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem; letter-spacing: 0.2em;
+  color: var(--accent); opacity: 0.75;
+}
+.sec-rule { width: 36px; height: 1px; background: var(--border2); }
+.sec-tag {
+  font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted);
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
+}
+h2 em { font-style: italic; color: var(--accent2); }
+
+/* ABOUT */
+#about { background: var(--bg2); }
+.about-body {
+  max-width: 760px; margin-top: 3rem;
+}
+.about-body p {
+  font-size: 1.08rem; font-weight: 300;
+  line-height: 1.85; color: var(--soft);
+  margin-bottom: 1.4rem;
+}
+.about-body p strong { color: var(--text); font-weight: 400; }
+
+/* PROJECTS */
+#projects { background: var(--bg); }
+.projects-intro { margin-bottom: 3.5rem; }
+
+.project-list {
+  border: 1px solid var(--border);
+}
+.project-item {
+  display: grid;
+  grid-template-columns: 72px 1fr 220px;
+  border-bottom: 1px solid var(--border);
+  transition: background .25s;
+  cursor: none;
+}
+.project-item:last-child { border-bottom: none; }
+.project-item:hover { background: var(--surface); }
+.project-item:hover .p-index { color: var(--accent2); }
+.project-item:hover .p-cta { opacity: 1; transform: translateX(0); }
+
+.p-index {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem; color: var(--muted);
+  border-right: 1px solid var(--border);
+  transition: color .25s;
+  padding: 2rem;
+}
+.p-body {
+  padding: 2.2rem 2.8rem;
+  border-right: 1px solid var(--border);
+}
+.p-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 300;
+  line-height: 1.2; margin-bottom: 0.6rem;
+}
+.p-desc {
+  font-size: 0.82rem; font-weight: 300;
+  color: var(--muted); line-height: 1.7;
+}
+.p-cta {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-top: 0.9rem;
+  display: flex; align-items: center; gap: 0.4rem;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity .25s, transform .25s;
+}
+.p-meta {
+  padding: 2.2rem;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 0.45rem;
+}
+.ptag {
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: .3rem .75rem;
+  border: 1px solid var(--border2);
+  color: var(--muted); width: fit-content;
+}
+
+/* SKILLS */
+#skills { background: var(--bg2); }
+.skills-grid {
+  display: grid; grid-template-columns: 300px 1fr;
+  gap: 7rem; align-items: start;
+  margin-top: 3.5rem;
+}
+.skills-desc {
+  font-size: 0.95rem; font-weight: 300;
+  color: var(--soft); line-height: 1.8;
+  margin-top: 1.2rem;
+}
+.skill-group { margin-bottom: 2.5rem; }
+.skill-group-title {
+  font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.1rem;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.chip {
+  display: flex; align-items: center; gap: 0.55rem;
+  padding: 0.6rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  font-size: 0.82rem; font-weight: 300; color: var(--soft);
+  transition: border-color .2s, color .2s;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent2); }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+/* RESUME */
+#resume { background: var(--bg); }
+.resume-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+  margin-top: 3.5rem;
+}
+.resume-left p {
+  font-size: 0.95rem; font-weight: 300;
+  color: var(--soft); line-height: 1.8;
+  margin: 1.2rem 0 2.5rem; max-width: 40ch;
+}
+.resume-file {
+  border: 1px solid var(--border2);
+  padding: 1.8rem 2.2rem;
+  display: flex; align-items: center; gap: 1.4rem;
+  margin-bottom: 1.2rem;
+  position: relative; overflow: hidden;
+  transition: border-color .25s;
+}
+.resume-file:hover { border-color: var(--accent); }
+.resume-file::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent); opacity: 0; transition: opacity .25s;
+}
+.resume-file:hover::before { opacity: 1; }
+.file-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+}
+.file-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+}
+.file-meta { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* CONTACT */
+#contact { background: var(--bg2); }
+.contact-layout {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 7rem; margin-top: 3.5rem;
+}
+.contact-email-link {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2.4rem); font-weight: 300;
+  color: var(--text); text-decoration: none;
+  border-bottom: 1px solid var(--border2);
+  padding-bottom: 1rem; margin-bottom: 1rem;
+  transition: color .2s, border-color .2s;
+}
+.contact-email-link:hover { color: var(--accent2); border-color: var(--accent); }
+.contact-note {
+  font-size: 0.82rem; font-weight: 300;
+  color: var(--muted); line-height: 1.75;
+}
+.social-rows { display: flex; flex-direction: column; }
+.social-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.3rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: padding-left .25s;
+}
+.social-row:first-child { border-top: 1px solid var(--border); }
+.social-row:hover { padding-left: 0.7rem; }
+.social-row:hover .s-name { color: var(--accent2); }
+.s-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 300;
+  color: var(--text); transition: color .2s;
+}
+.s-handle { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+.s-arrow { color: var(--muted); font-size: 0.8rem; transition: color .2s; }
+.social-row:hover .s-arrow { color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 1.8rem 5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem; font-weight: 300;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+}
+.footer-copy { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 860px) {
+  nav { padding: 1.2rem 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  #hero { padding: 0 1.5rem 5rem; }
+  .hero-scroll { display: none; }
+  .skills-grid, .resume-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .project-item { grid-template-columns: 55px 1fr; }
+  .p-meta { display: none; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-trail" id="trail"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-name">Melody Shewan</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-divider"></div>
+  <div class="hero-bg-letter">M</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Social Media Marketer &amp; Designer</span>
+    </div>
+    <h1>Melody<br><em>Shewan.</em></h1>
+    <p class="hero-tagline">Creating content that connects — blending design instinct with real-world experience to build brands people actually remember.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-accent">View my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label reveal">
+    <span class="sec-num">02</span>
+    <div class="sec-rule"></div>
+    <span class="sec-tag">About Me</span>
+  </div>
+  <h2 class="reveal">Curious by nature,<br><em>driven by craft.</em></h2>
+  <div class="about-body reveal">
+    <p>I'm Melody — a <strong>social media marketer and designer</strong> who's never been afraid to try something new. My path hasn't been a straight line, and that's exactly what makes me unique.</p>
+    <p>I've shown dedication across several different fields — from <strong>working with kids</strong> to retail and service — and I bring that same commitment to everything I take on. Right now, I channel it into <strong>designing and creating content for a health brand,</strong> work I find both meaningful and creatively rewarding.</p>
+    <p>That breadth of experience gives me a <strong>genuine understanding of people</strong> that shapes how I approach every piece of content I make. I show up curious, adaptable, and ready to put in the work.</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-intro">
+    <div class="sec-label reveal">
+      <span class="sec-num">03</span>
+      <div class="sec-rule"></div>
+      <span class="sec-tag">Projects &amp; Experience</span>
+    </div>
+    <h2 class="reveal">Work that shaped<br><em>who I am.</em></h2>
+  </div>
+
+  <div class="project-list reveal">
+
+    <div class="project-item">
+      <div class="p-index">01</div>
+      <div class="p-body">
+        <div class="p-title">Paris Model United Nations — Best Delegation</div>
+        <p class="p-desc">Represented Brazil on an international stage, campaigning and debating with delegates from cultures around the world. Wrote treaties and resolutions under pressure, adapted to different systems of thought, and led my delegation to win the award for Best Delegation — a masterclass in leadership, diplomacy, and persuasive communication.</p>
+        <div class="p-cta">View achievement ↗</div>
+      </div>
+      <div class="p-meta">
+        <span class="ptag">Leadership</span>
+        <span class="ptag">Public Speaking</span>
+        <span class="ptag">Strategy</span>
+        <span class="ptag">Award Winner</span>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="p-index">02</div>
+      <div class="p-body">
+        <div class="p-title">Mock Trial — State Competitor</div>
+        <p class="p-desc">Took on the roles of both lawyer and witness in a competitive mock trial programme, advancing all the way to states. Sharpened my ability to think critically on my feet, build compelling arguments, and communicate with confidence and clarity under real pressure.</p>
+        <div class="p-cta">View achievement ↗</div>
+      </div>
+      <div class="p-meta">
+        <span class="ptag">Critical Thinking</span>
+        <span class="ptag">Reasoning</span>
+        <span class="ptag">Communication</span>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="p-index">03</div>
+      <div class="p-body">
+        <div class="p-title">Custom AI Chatbots — Self-Initiated</div>
+        <p class="p-desc">Built and coded my own AI chatbots from scratch — each specialised for specific tasks with their own distinct personalities. This self-directed project deepened my understanding of AI models, interfaces, and pricing, and turned genuine curiosity about emerging technology into real, practical skill.</p>
+        <div class="p-cta">Explore ↗</div>
+      </div>
+      <div class="p-meta">
+        <span class="ptag">AI / Tech</span>
+        <span class="ptag">Coding</span>
+        <span class="ptag">Self-Initiated</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-label reveal">
+    <span class="sec-num">04</span>
+    <div class="sec-rule"></div>
+    <span class="sec-tag">Skills &amp; Tools</span>
+  </div>
+  <h2 class="reveal">Tools I work<br><em>with daily.</em></h2>
+
+  <div class="skills-grid">
+    <div class="reveal">
+      <p class="skills-desc">A hands-on toolkit built through real creative work — from designing social content to editing photos and organising campaigns.</p>
+    </div>
+    <div class="reveal">
+      <div class="skill-group">
+        <div class="skill-group-title">Design &amp; Visual</div>
+        <div class="chips">
+          <div class="chip"><span class="dot" style="background:#9b7fe8"></span>Canva</div>
+          <div class="chip"><span class="dot" style="background:#c4aaff"></span>Adobe Express</div>
+          <div class="chip"><span class="dot" style="background:#60a5fa"></span>Adobe Photoshop</div>
+          <div class="chip"><span class="dot" style="background:#818cf8"></span>Lightroom</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Marketing &amp; Content</div>
+        <div class="chips">
+          <div class="chip"><span class="dot" style="background:#38bdf8"></span>Content Creation</div>
+          <div class="chip"><span class="dot" style="background:#9b7fe8"></span>Social Media Strategy</div>
+          <div class="chip"><span class="dot" style="background:#c4aaff"></span>Brand Storytelling</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tech &amp; Organisation</div>
+        <div class="chips">
+          <div class="chip"><span class="dot" style="background:#60a5fa"></span>Microsoft Excel</div>
+          <div class="chip"><span class="dot" style="background:#818cf8"></span>AI Tools &amp; Chatbots</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="sec-label reveal">
+    <span class="sec-num">05</span>
+    <div class="sec-rule"></div>
+    <span class="sec-tag">Résumé / CV</span>
+  </div>
+  <div class="resume-layout">
+    <div class="reveal">
+      <h2>The full<br><em>picture.</em></h2>
+      <p>Download my CV for a complete overview of my experience, background, and skills — easy to save or share.</p>
+      <a href="Melody_Shewan_CV.pdf" download class="btn btn-accent">↓ Download CV</a>
+    </div>
+    <div class="reveal">
+      <div class="resume-file">
+        <div class="file-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <div>
+          <div class="file-name">Melody_Shewan_CV.pdf</div>
+          <div class="file-meta">Save your PDF with this filename in the same folder as this HTML file</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label reveal">
+    <span class="sec-num">06</span>
+    <div class="sec-rule"></div>
+    <span class="sec-tag">Get In Touch</span>
+  </div>
+  <h2 class="reveal">Let's create something<br><em>worth seeing.</em></h2>
+
+  <div class="contact-layout">
+    <div class="reveal">
+      <a href="mailto:melshewan@gmail.com" class="contact-email-link">melshewan@gmail.com</a>
+      <p class="contact-note">Open to new opportunities, collaborations, and creative projects. I'd love to hear from you.</p>
+    </div>
+    <div class="reveal">
+      <div class="social-rows">
+        <a href="https://instagram.com/mel.ove.lys" target="_blank" class="social-row">
+          <div>
+            <div class="s-name">Instagram</div>
+            <div class="s-handle">@mel.ove.lys</div>
+          </div>
+          <span class="s-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Melody Shewan</span>
+  <span class="footer-copy">© 2026 — All rights reserved</span>
+</footer>
+
+<script>
+  // Cursor
+  const cur = document.getElementById('cur');
+  const trail = document.getElementById('trail');
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  });
+  (function tick() {
+    tx += (mx - tx) * 0.13; ty += (my - ty) * 0.13;
+    trail.style.left = tx + 'px'; trail.style.top = ty + 'px';
+    requestAnimationFrame(tick);
+  })();
+
+  // Scroll reveal — starts visible if JS is slow, adds class when in view
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  // Trigger immediately for anything already in viewport on load
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Fallback: reveal everything after 300ms in case observer doesn't fire
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.on)').forEach(el => {
+      el.classList.add('on');
+    });
+  }, 300);
+</script>
+</body>
+</html>
